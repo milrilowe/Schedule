@@ -27,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import chipotlelogic.Deployment;
 import chipotlelogic.Rank;
 import chipotlelogic.Week;
-import chipotlelogic.Day;
+import chipotlelogic.DaysOfWeek;
 import employee.Employee;
 import employee.EmployeeList;
 
@@ -126,7 +126,7 @@ public class ScheduleController {
 				
 				add(nameWrapper);
 				
-				for (Day day : week){
+				for (DaysOfWeek day : week){
 					add(new JPanel().add(new JLabel("7:00AM - 7:00PM")));
 				}
 
@@ -188,7 +188,7 @@ public class ScheduleController {
 		scheduleView.weekPanel.repaint();
 
 		scheduleView.weekPanel.add(new JPanel());
-		for (Day day : week){
+		for (DaysOfWeek day : week){
 			if(day.ordinal() % 2 == 0) {
 				JPanel dayPanel = new JPanel();
 				dayPanel.setBackground(Color.lightGray);

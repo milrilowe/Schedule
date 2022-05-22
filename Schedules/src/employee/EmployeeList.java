@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 import chipotlelogic.Rank;
 
 public class EmployeeList implements Iterable<Employee> {
-	private ArrayList<Employee> employeeList;
+	private static ArrayList<Employee> employeeList;
 	private FileInputStream in;
 	private FileOutputStream out;
 
@@ -89,7 +89,7 @@ public class EmployeeList implements Iterable<Employee> {
 	 * Returns an ArrayList<Employee> with elements sorted by availability
 	 * @return an ArrayList<Employee> with elements sorted by availability
 	 */
-	public ArrayList<Employee> sortByAvailability() {
+	public static ArrayList<Employee> sortByAvailability() {
 		ArrayList<Employee> sort = new ArrayList<Employee>();
 
 		for(Employee e : employeeList) {
@@ -108,7 +108,7 @@ public class EmployeeList implements Iterable<Employee> {
 	 * @param b:	j
 	 * @return		ArrayList<Employee> sorted by availability
 	 */
-	private ArrayList<Employee> quickSort(ArrayList<Employee> list, int a, int b) {
+	private static ArrayList<Employee> quickSort(ArrayList<Employee> list, int a, int b) {
 	
 		if (a >= b) {
 			return list;
@@ -143,8 +143,8 @@ public class EmployeeList implements Iterable<Employee> {
 	 * 
 	 * @return employeeList
 	 */
-	public ArrayList<Employee> getList() {
-		return employeeList;
+	public static ArrayList<Employee> getList() {
+		return new EmployeeList();
 	}
 
 	/**
