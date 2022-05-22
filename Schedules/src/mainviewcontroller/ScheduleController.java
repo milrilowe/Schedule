@@ -26,6 +26,8 @@ import javax.swing.event.ListSelectionListener;
 
 import chipotlelogic.Deployment;
 import chipotlelogic.Rank;
+import chipotlelogic.Week;
+import chipotlelogic.Day;
 import employee.Employee;
 import employee.EmployeeList;
 
@@ -36,6 +38,7 @@ import employee.EmployeeList;
 public class ScheduleController {
 	private ScheduleView scheduleView;
 	private EmployeeList employeeList;
+	private Week week;
 	private JPanel scheduleViewPanel;
 
 	/**
@@ -52,11 +55,12 @@ public class ScheduleController {
 	public ScheduleController(ScheduleView scheduleView, EmployeeList employeeList) {
 		this.scheduleView = scheduleView;
 		this.employeeList = employeeList;
+		this.week = new Week();
 		scheduleViewPanel = scheduleView.thePanel;
 
 		this.scheduleView.addEditListButtonListener(new EditListButtonListener());
-		this.scheduleView.addEmployeeButtonListener(new EmployeeButtonListener());
-		this.scheduleView.addScheduleButtonListener(new ScheduleButtonListener());
+
+		employeeWindow();
 	}
 
 	/**
@@ -105,7 +109,7 @@ public class ScheduleController {
 				edit.addActionListener(editListener);
 
 				// Panels just used to get components to behave intended way
-				setLayout(new BorderLayout());
+				setLayout(new GridLayout(1, 9));
 				JPanel nameWrapper = new JPanel();
 				JPanel editWrapper = new JPanel();
 
@@ -118,12 +122,20 @@ public class ScheduleController {
 							BorderLayout.CENTER);
 				}
 				nameWrapper.setBorder(new EmptyBorder(0, 10, 0, 0));
+			
+				
+				add(nameWrapper);
+				
+				for (Day day : week){
+					add(new JPanel().add(new JLabel("7:00AM - 7:00PM")));
+				}
+
 				editWrapper.add(edit);
 
 				// One panel holding name label and another panel holding edit button are added
 				// to the EmployeePanel
-				add(nameWrapper, BorderLayout.WEST);
-				add(editWrapper, BorderLayout.EAST);
+
+				add(editWrapper);
 
 			}
 
@@ -171,6 +183,21 @@ public class ScheduleController {
 			prev = e;
 		}
 
+		scheduleView.weekPanel.setLayout(new GridLayout(0, 9));
+		scheduleView.weekPanel.removeAll();
+		scheduleView.weekPanel.repaint();
+
+		scheduleView.weekPanel.add(new JPanel());
+		for (Day day : week){
+			if(day.ordinal() % 2 == 0) {
+				JPanel dayPanel = new JPanel();
+				dayPanel.setBackground(Color.lightGray);
+				scheduleView.weekPanel.add(dayPanel.add(new JLabel(day.toString())));
+			} else {
+				scheduleView.weekPanel.add(new JPanel().add(new JLabel(day.toString())));
+			}
+		}
+
 		scheduleView.employeePanelPanel.repaint();
 
 		// Add all the components
@@ -180,8 +207,12 @@ public class ScheduleController {
 		scheduleView.wrappingPanel.removeAll();
 		scheduleView.wrappingPanel.repaint();
 
+
 		scheduleView.wrappingPanel.setLayout(new BorderLayout());
 		scheduleView.wrappingPanel.add(scheduleView.editListPanel, BorderLayout.SOUTH);
+
+		scheduleView.weekPanelWrapper.setLayout(new GridLayout());
+		scheduleView.weekPanelWrapper.add(scheduleView.weekPanel);
 
 		scheduleView.employeePanelPanel.setBackground(Color.lightGray);
 		scheduleView.employeePanelPanel.setLayout(new GridLayout(0, 1));
@@ -189,8 +220,8 @@ public class ScheduleController {
 		scheduleView.employeeScroll.setViewportView(scheduleView.employeePanelPanel);
 		scheduleView.employeeScroll.setBorder(null);
 
+		add(scheduleView.weekPanelWrapper);
 		add(scheduleView.employeeScroll);
-
 		add(scheduleView.wrappingPanel);
 
 		validate();
@@ -715,29 +746,6 @@ public class ScheduleController {
 		for (int i = 0; i < employeeAvailability.length; i++) {
 			scheduleView.availabilityList.getSelectionModel().addSelectionInterval(employeeAvailability[i],
 					employeeAvailability[i]);
-		}
-	}
-
-	/**
-	 * ActionListener for employeeButton
-	 */
-	private class EmployeeButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			employeeWindow();
-		}
-
-	}
-
-	/**
-	 * ActionListener for scheduleButton (Not ready to be implemented)
-	 */
-	private class ScheduleButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// scheduleWindow();
 		}
 	}
 

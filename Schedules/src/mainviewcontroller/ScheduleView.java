@@ -26,7 +26,6 @@ public class ScheduleView extends JFrame {
 	protected JList availabilityList;
 
 	// Buttons
-	protected JButton employeeButton;
 	protected JButton scheduleButton;
 	protected JButton editListButton;
 	protected JButton submitButton;
@@ -65,8 +64,11 @@ public class ScheduleView extends JFrame {
 	protected JPanel minorPanel;
 	protected JPanel editListPanel;
 	protected JPanel submitPanel;
+	protected JPanel weekPanelWrapper;
+	protected JPanel weekPanel;
 	protected JPanel employeePanelPanel;
 	protected JPanel wrappingPanel;
+
 
 	// JLabels
 	protected JLabel nameLabel;
@@ -79,7 +81,6 @@ public class ScheduleView extends JFrame {
 	 * Non-Arg constructor initializes components and calls init() method
 	 */
 	public ScheduleView() {
-		employeeButton = new JButton("Add/Edit Employees");
 		scheduleButton = new JButton("Generate Schedule");
 		editListButton = new JButton("Add New Employee");
 		// These two buttons cause two different events so have different text assigned
@@ -161,8 +162,11 @@ public class ScheduleView extends JFrame {
 		minorPanel = new JPanel();
 		editListPanel = new JPanel();
 		submitPanel = new JPanel();
+		weekPanelWrapper = new JPanel();
+		weekPanel = new JPanel();
 		employeePanelPanel = new JPanel();
 		wrappingPanel = new JPanel();
+		
 
 		employeeScroll = new JScrollPane();
 		availabilityScroll = new JScrollPane();
@@ -179,9 +183,6 @@ public class ScheduleView extends JFrame {
 
 		thePanel.setLayout(new BoxLayout(thePanel, BoxLayout.Y_AXIS));
 
-		employeeButton.setAlignmentX(CENTER_ALIGNMENT);
-		thePanel.add(employeeButton);
-		
 		add(thePanel);
 		setTitle("Schedule");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,13 +190,6 @@ public class ScheduleView extends JFrame {
 	}
 
 	// Set up action listeners for buttons
-
-	/**
-	 * Adds listener to addEmployee Button
-	 */
-	public void addEmployeeButtonListener(ActionListener listener) {
-		employeeButton.addActionListener(listener);
-	}
 
 	/**
 	 * Adds listener to addSchedule Button

@@ -86,6 +86,59 @@ public class EmployeeList implements Iterable<Employee> {
 	}
 
 	/**
+	 * Returns an ArrayList<Employee> with elements sorted by availability
+	 * @return an ArrayList<Employee> with elements sorted by availability
+	 */
+	public ArrayList<Employee> sortByAvailability() {
+		ArrayList<Employee> sort = new ArrayList<Employee>();
+
+		for(Employee e : employeeList) {
+			sort.add(e);
+		}
+
+		return quickSort(sort, -1, sort.size());
+
+		
+		}
+
+	/**
+	 * Quick sort helper method
+	 * @param list:	List to sort
+	 * @param a:	i
+	 * @param b:	j
+	 * @return		ArrayList<Employee> sorted by availability
+	 */
+	private ArrayList<Employee> quickSort(ArrayList<Employee> list, int a, int b) {
+	
+		if (a >= b) {
+			return list;
+		}
+	
+		Employee pivot = list.get(b);
+	
+		int left = a;
+		int right = b;
+	
+		while (left < right) {
+			while(list.get(left).compareAvailability(pivot) < 0)
+				left++;
+	
+			while(list.get(right).compareAvailability(pivot) > 0)
+				right--;
+	
+			if (right > left);
+			{
+				Collections.swap(list, left, right);
+			}
+		}
+
+	quickSort(list, a, right-1);
+	quickSort(list, right+1, b);
+
+	return list;
+	} 
+
+	/**
 	 * Returns employeeList
 	 * 
 	 * @return employeeList
@@ -173,6 +226,14 @@ public class EmployeeList implements Iterable<Employee> {
 			}
 		}
 		return emp;
+	}
+
+	/**
+	 * Returns length of employeeList
+	 * @return length of employeeList
+	 */
+	public int getLength() {
+		return employeeList.size();
 	}
 
 	@Override

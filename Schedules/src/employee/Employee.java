@@ -243,4 +243,15 @@ public class Employee implements Serializable, Comparable<Employee> {
 	public String toString() {
 		return fullName;
 	}
+
+
+	public int compareAvailability(Employee e) {
+		if(this.getAvailability().length > e.getAvailability().length) {
+			return 1;
+		} else if (this.getAvailability().length < e.getAvailability().length) {
+			return -1;
+		} else {
+			return 0;
+		}
+	}
 }

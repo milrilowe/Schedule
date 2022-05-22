@@ -5,8 +5,14 @@ package chipotlelogic;
  *
  */
 public enum Deployment {
-	grill("Grill"), grill2("Grill 2"), dish("Dish"), lobby("Lobby"), tortilla("Tortilla"), salsa("Salsa"), cash(
-			"Cash"), prep("Prep");
+	grill("Grill"),
+	grill2("Grill 2"),
+	dish("Dish"),
+	lobby("Lobby"),
+	tortilla("Tortilla"),
+	salsa("Salsa"),
+	cash("Cash"),
+	prep("Prep");
 
 	private String toString;
 
