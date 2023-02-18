@@ -9,7 +9,7 @@ import chipotlelogic.Rank;
 /**
  * Class holds information on an employee. Mostly important for their
  * availability, but also has their name and rank
- * 
+ *
  * @author Miles
  *
  */
@@ -26,7 +26,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Constructor takes a name and a rank
-	 * 
+	 *
 	 * @param name:
 	 *            The employee's name
 	 * @param rank:
@@ -61,7 +61,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 	/**
 	 * Constructor takes only a name but passes name to name and rank constructor,
 	 * using default rank of crew member
-	 * 
+	 *
 	 * @param name
 	 *            the employee's name
 	 */
@@ -71,7 +71,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Sets the employee's name
-	 * 
+	 *
 	 * @param name:
 	 *            name to set employee to
 	 */
@@ -96,7 +96,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Sets the employee's rank
-	 * 
+	 *
 	 * @param rank:
 	 *            the rank to be set to
 	 */
@@ -113,7 +113,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Sets whether or not the employee is a minor
-	 * 
+	 *
 	 * @param minor
 	 *            whether or not they are a minor
 	 */
@@ -123,7 +123,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Adds a Deployment to the ArrayList of known deployments
-	 * 
+	 *
 	 * @param toAdd
 	 *            the deployment that is being added to known deployments
 	 */
@@ -135,7 +135,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Removes a Deployment from the ArrayList of known deployments
-	 * 
+	 *
 	 * @param toRemove
 	 *            the deployment that is being removed from known deployments
 	 */
@@ -155,7 +155,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns deployments this employee knows
-	 * 
+	 *
 	 * @return deployments this employee knows
 	 */
 	public ArrayList<Deployment> getKnownDeployments() {
@@ -164,7 +164,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns whether or not this employee knows deployment passed
-	 * 
+	 *
 	 * @param deployment
 	 *            the deployment we are finding if employee knows
 	 * @return boolean value of if they know deployment or not
@@ -176,7 +176,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns the employee's full name
-	 * 
+	 *
 	 * @return the employee's full name
 	 */
 	public String getFullName() {
@@ -185,7 +185,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns the employee's first name
-	 * 
+	 *
 	 * @return the employee's first name
 	 */
 	public String getFirstName() {
@@ -194,7 +194,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns the employee's last name
-	 * 
+	 *
 	 * @return the employee's last name
 	 */
 	public String getLastName() {
@@ -203,7 +203,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns the employee's rank
-	 * 
+	 *
 	 * @return the employee's rank
 	 */
 	public Rank getRank() {
@@ -212,7 +212,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns the availability of the employee
-	 * 
+	 *
 	 * @return the availability of the employee
 	 */
 	public int[] getAvailability() {
@@ -221,7 +221,7 @@ public class Employee implements Serializable, Comparable<Employee> {
 
 	/**
 	 * Returns true or false for if the employee is a minor
-	 * 
+	 *
 	 * @return true or false for if the employee is a minor
 	 */
 	public boolean isMinor() {

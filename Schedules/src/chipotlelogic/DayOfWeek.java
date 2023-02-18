@@ -4,13 +4,13 @@ package chipotlelogic;
  *
  */
 public enum DayOfWeek {
+	sunday("Sunday"),
 	monday("Monday"),
-    tuesday("Tuesday"),
-    wednesday("Wednesday"),
-    thursday("Thursday"),
-    friday("Friday"),
-    saturday("Saturday"),
-    sunday("Sunday");
+	tuesday("Tuesday"),
+	wednesday("Wednesday"),
+	thursday("Thursday"),
+	friday("Friday"),
+	saturday("Saturday");
 
 	private String toString;
 

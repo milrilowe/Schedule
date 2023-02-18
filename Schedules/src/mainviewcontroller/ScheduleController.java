@@ -30,6 +30,8 @@ import chipotlelogic.Week;
 import chipotlelogic.DayOfWeek;
 import employee.Employee;
 import employee.EmployeeList;
+import schedulelogic.Day;
+import schedulelogic.Schedule;
 
 /**
  * Controller for MVC design pattern
@@ -39,6 +41,7 @@ public class ScheduleController {
 	private ScheduleView scheduleView;
 	private EmployeeList employeeList;
 	private Week week;
+	private Schedule schedule;
 	private JPanel scheduleViewPanel;
 
 	/**
@@ -56,10 +59,11 @@ public class ScheduleController {
 		this.scheduleView = scheduleView;
 		this.employeeList = employeeList;
 		this.week = new Week();
+		this.schedule = new Schedule();
 		scheduleViewPanel = scheduleView.thePanel;
 		this.scheduleView.addEditListButtonListener(new EditListButtonListener());
 
-		employeeWindow();
+		scheduleWindow();
 	}
 
 	/**
@@ -76,8 +80,8 @@ public class ScheduleController {
 	 * Updates the frame with the necessary JComponents to display and edit the list
 	 * of employees
 	 */
-	private void employeeWindow() {
-
+	private void scheduleWindow() {
+		schedule = new Schedule();
 		init();
 		// Resets the panel holding the employee panels
 		scheduleView.employeePanelPanel.removeAll();
@@ -125,8 +129,10 @@ public class ScheduleController {
 
 				add(nameWrapper);
 
-				for (DayOfWeek day : week){
-					JLabel shiftLabel = new JLabel("7:00AM - 7:00PM");
+				for (Day day : schedule){
+					String label = "";
+
+					JLabel shiftLabel = new JLabel(day.getEmployeeShift(e));
 					shiftLabel.setHorizontalAlignment(JLabel.CENTER);
 					add(new JPanel().add(shiftLabel));
 				}
@@ -780,7 +786,7 @@ public class ScheduleController {
 				addDeployments(newEmployee);
 
 				employeeList.addEmployee(newEmployee);
-				employeeWindow();
+				scheduleWindow();
 				employeeList.writeToFile("data.dat");
 			} catch (NoNameException ex) {
 				JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
@@ -834,7 +840,7 @@ public class ScheduleController {
 				employeeToEdit.removeKnownDeployments(toRemove);
 
 				addDeployments(employeeToEdit);
-				employeeWindow();
+				scheduleWindow();
 
 				//Update data.dat
 				employeeList.writeToFile("data.dat");
@@ -851,7 +857,7 @@ public class ScheduleController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			employeeWindow();
+			scheduleWindow();
 		}
 	}
 
@@ -875,7 +881,7 @@ public class ScheduleController {
 
 			if (remove == JOptionPane.YES_OPTION) {
 				employeeList.removeEmployee(employeeToRemove);
-				employeeWindow();
+				scheduleWindow();
 				// Update data.dat to have employee removed.
 				employeeList.writeToFile("data.dat");
 			}

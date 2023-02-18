@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import chipotlelogic.Deployment;
 import chipotlelogic.Rank;
 
 public class EmployeeList implements Iterable<Employee> {
@@ -96,7 +97,7 @@ public class EmployeeList implements Iterable<Employee> {
 			sort.add(e);
 		}
 
-		return quickSort(sort, -1, sort.size());
+		return quickSort(sort, 0, sort.size() - 1);
 
 
 		}
@@ -109,34 +110,31 @@ public class EmployeeList implements Iterable<Employee> {
 	 * @return		ArrayList<Employee> sorted by availability
 	 */
 	private static ArrayList<Employee> quickSort(ArrayList<Employee> list, int a, int b) {
+    if (a < b) {
+        Employee pivot = list.get(b);
+        int left = a;
+        int right = b - 1;
 
-		if (a >= b) {
-			return list;
-		}
+        while (left <= right) {
+            while (left <= right && list.get(left).compareAvailability(pivot) < 0) {
+                left++;
+            }
+            while (right >= left && list.get(right).compareAvailability(pivot) >= 0) {
+                right--;
+            }
+            if (left < right) {
+                Collections.swap(list, left, right);
+            }
+        }
 
-		Employee pivot = list.get(b);
+        Collections.swap(list, left, b);
 
-		int left = a;
-		int right = b;
+        quickSort(list, a, left - 1);
+        quickSort(list, left + 1, b);
+    }
 
-		while (left < right) {
-			while(list.get(left).compareAvailability(pivot) < 0)
-				left++;
-
-			while(list.get(right).compareAvailability(pivot) > 0)
-				right--;
-
-			if (right > left)
-			{
-				Collections.swap(list, left, right);
-			}
-		}
-
-	quickSort(list, a, right-1);
-	quickSort(list, right+1, b);
-
-	return list;
-	}
+    return list;
+}
 
 	/**
 	 * Returns employeeList
@@ -145,6 +143,25 @@ public class EmployeeList implements Iterable<Employee> {
 	 */
 	public static ArrayList<Employee> getList() {
 		return employeeList;
+	}
+
+	/**
+	 * Returns list of employees that known particular deployment
+	 *
+	 * @param d
+	 *          the deployment that employee must know to be part of returned list
+	 * @return list of employees that known particular deployment
+	 */
+	public static ArrayList<Employee> getEmployeesByDeployment(Deployment d) {
+		ArrayList<Employee> employeesByDeployment = new ArrayList<Employee>();
+
+		for (Employee e : employeeList) {
+			if (e.getKnownDeployments().contains(d)) {
+				employeesByDeployment.add(e);
+			}
+		}
+
+		return employeesByDeployment;
 	}
 
 	/**
