@@ -9,7 +9,7 @@ import java.util.Map;
 import chipotlelogic.Deployment;
 
 /**
- * 
+ *
  */
 public class Day {
 
@@ -33,7 +33,7 @@ public class Day {
     //ArrayList sorted by amount of availability employee gives, so that we prioritize scheduling those who offer few hours, otherwise they may never get scheduled.
     ArrayList<Employee> sortedEmployeeList;
     public Day() {
-         
+
         sortedEmployeeList = EmployeeList.sortByAvailability();
         working = (ArrayList<Employee>[]) new ArrayList[HOURS]; //I'm just trying to avoid using a map - hours make more sense as indexes than as keys.
         hoursWorked = new ArrayList<Employee>();
@@ -46,7 +46,7 @@ public class Day {
         deployLobby();
         deployTortilla();
         deploySalsa();
-        
+
     }
 
     /**
@@ -60,7 +60,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.grill)) {
                             grill1[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -79,7 +79,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.grill2)) {
                             grill2[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -98,7 +98,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.prep)) {
                             prep[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -117,7 +117,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.dish)) {
                             dish[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -126,7 +126,7 @@ public class Day {
     }
 
     /**
-     * Populates salsa array with employees.  Each index represents an hour of work from open to close. 
+     * Populates salsa array with employees.  Each index represents an hour of work from open to close.
      */
     private void deploySalsa() {
         for(int i = 0; i < salsa.length; i++) {
@@ -136,7 +136,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.salsa)) {
                             salsa[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -156,7 +156,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.lobby)) {
                             lobby[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -166,7 +166,7 @@ public class Day {
 
     /**
      * Populates cash array with employees.  Each index represents an hour of work from open to close.  No one is deployed on cash until 11:00AM
-     * so i starts at 4, leaving indices 0-4 empty.  No one is deployed on cash after 10, so we iterate until i < lobby.length - 1 
+     * so i starts at 4, leaving indices 0-4 empty.  No one is deployed on cash after 10, so we iterate until i < lobby.length - 1
      */
     private void deployCash() {
         for(int i = 0; i < cash.length; i++) {
@@ -176,7 +176,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.cash)) {
                             cash[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }
@@ -186,7 +186,7 @@ public class Day {
 
     /**
      * Populates tortilla array with employees.  Each index represents an hour of work from open to close.  No one is deployed on tortilla until 11:00AM
-     * so i starts at 4, leaving indices 0-4 empty.  No one is deployed on tortilla after 10, so we iterate until i < lobby.length - 1 
+     * so i starts at 4, leaving indices 0-4 empty.  No one is deployed on tortilla after 10, so we iterate until i < lobby.length - 1
      */
     private void deployTortilla() {
         for(int i = 4; i < tortilla.length - 1; i++) {
@@ -196,7 +196,7 @@ public class Day {
                         if(e.getKnownDeployments().contains(Deployment.tortilla)) {
                             tortilla[i] = e;
 
-                            working[i].add(e); 
+                            working[i].add(e);
                         }
                     }
                 }

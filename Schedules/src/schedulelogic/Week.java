@@ -2,14 +2,14 @@ package schedulelogic;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import chipotlelogic.DaysOfWeek;
+import chipotlelogic.DayOfWeek;
 
 /**
  * Week is an ArrayList of Days.  Each day will need to be scheduled for each deployment
  *
  */
 public class Week {
-    public static ArrayList<DaysOfWeek> week;
+    public static ArrayList<DayOfWeek> week;
 
     public Week() {
 		//You need a static array to keep track of hours worked throughout week - Day object has one for each day, you can just tally up from there

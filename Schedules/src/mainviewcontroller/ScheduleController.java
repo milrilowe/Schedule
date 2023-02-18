@@ -27,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import chipotlelogic.Deployment;
 import chipotlelogic.Rank;
 import chipotlelogic.Week;
-import chipotlelogic.DaysOfWeek;
+import chipotlelogic.DayOfWeek;
 import employee.Employee;
 import employee.EmployeeList;
 
@@ -46,7 +46,7 @@ public class ScheduleController {
 	 * model, view, and controller for MVC design pattern. Initializes the view and
 	 * model, and adds some action listeners to buttons that only have one action
 	 * listener
-	 * 
+	 *
 	 * @param scheduleView
 	 *            the view (holds all of the GUI components)
 	 * @param scheduleModel
@@ -57,7 +57,6 @@ public class ScheduleController {
 		this.employeeList = employeeList;
 		this.week = new Week();
 		scheduleViewPanel = scheduleView.thePanel;
-
 		this.scheduleView.addEditListButtonListener(new EditListButtonListener());
 
 		employeeWindow();
@@ -95,7 +94,7 @@ public class ScheduleController {
 			/**
 			 * Constructor takes has a parameter Employee. The employee passed as an
 			 * argument will stay with the panel, allowing us to edit the employee
-			 * 
+			 *
 			 * @param e
 			 *            The panel's employee
 			 */
@@ -122,12 +121,14 @@ public class ScheduleController {
 							BorderLayout.CENTER);
 				}
 				nameWrapper.setBorder(new EmptyBorder(0, 10, 0, 0));
-			
-				
+
+
 				add(nameWrapper);
-				
-				for (DaysOfWeek day : week){
-					add(new JPanel().add(new JLabel("7:00AM - 7:00PM")));
+
+				for (DayOfWeek day : week){
+					JLabel shiftLabel = new JLabel("7:00AM - 7:00PM");
+					shiftLabel.setHorizontalAlignment(JLabel.CENTER);
+					add(new JPanel().add(shiftLabel));
 				}
 
 				editWrapper.add(edit);
@@ -175,6 +176,26 @@ public class ScheduleController {
 			if (prev == null) { // Checks to see if previous employee has same rank, if not, it will add a
 								// divider panel, but first employee does not have a previous employee to
 								// compare rank to
+
+				scheduleView.weekPanel.setLayout(new GridLayout(0, 9));
+				scheduleView.weekPanel.removeAll();
+				scheduleView.weekPanel.repaint();
+
+				JPanel dayPanel;
+				scheduleView.weekPanel.add(new JPanel());
+
+				for (DayOfWeek day : week){
+						dayPanel = new JPanel();
+
+						JLabel dayLabel = new JLabel(day.toString());
+						dayLabel.setHorizontalAlignment(JLabel.CENTER);
+						dayPanel.add(dayLabel);
+						scheduleView.weekPanel.add(dayPanel);
+				}
+
+				scheduleView.weekPanelWrapper.add(scheduleView.weekPanel);
+				scheduleView.employeePanelPanel.add(scheduleView.weekPanelWrapper);
+
 				scheduleView.employeePanelPanel.add(new JPanel().add(new JLabel(e.getRank().toString())));
 			} else if (prev.getRank() != e.getRank()) {
 				scheduleView.employeePanelPanel.add(new JPanel().add(new JLabel(e.getRank().toString())));
@@ -183,20 +204,7 @@ public class ScheduleController {
 			prev = e;
 		}
 
-		scheduleView.weekPanel.setLayout(new GridLayout(0, 9));
-		scheduleView.weekPanel.removeAll();
-		scheduleView.weekPanel.repaint();
 
-		scheduleView.weekPanel.add(new JPanel());
-		for (DaysOfWeek day : week){
-			if(day.ordinal() % 2 == 0) {
-				JPanel dayPanel = new JPanel();
-				dayPanel.setBackground(Color.lightGray);
-				scheduleView.weekPanel.add(dayPanel.add(new JLabel(day.toString())));
-			} else {
-				scheduleView.weekPanel.add(new JPanel().add(new JLabel(day.toString())));
-			}
-		}
 
 		scheduleView.employeePanelPanel.repaint();
 
@@ -219,10 +227,10 @@ public class ScheduleController {
 
 		scheduleView.employeeScroll.setViewportView(scheduleView.employeePanelPanel);
 		scheduleView.employeeScroll.setBorder(null);
+		scheduleViewPanel.setLayout(new BorderLayout());
 
-		add(scheduleView.weekPanelWrapper);
-		add(scheduleView.employeeScroll);
-		add(scheduleView.wrappingPanel);
+		scheduleViewPanel.add(scheduleView.employeeScroll, BorderLayout.CENTER);
+		scheduleViewPanel.add(scheduleView.wrappingPanel, BorderLayout.SOUTH);
 
 		validate();
 
@@ -240,7 +248,7 @@ public class ScheduleController {
 
 	/**
 	 * Updates the frame with the necessary JComponents to edit an employee, e
-	 * 
+	 *
 	 * @param e
 	 *            the employee we are editing
 	 */
@@ -296,7 +304,7 @@ public class ScheduleController {
 	/**
 	 * Updates the frame with the necessary JComponents specific to editing an
 	 * employee
-	 * 
+	 *
 	 * @param e
 	 *            the employee we are editing
 	 */
@@ -475,7 +483,7 @@ public class ScheduleController {
 
 			/**
 			 * Method helps to check if an entire row is selected or not.
-			 * 
+			 *
 			 * @param a
 			 *            The whole row
 			 * @param b
@@ -602,7 +610,7 @@ public class ScheduleController {
 
 	/**
 	 * Returns the rank selected by JRadio Buttons
-	 * 
+	 *
 	 * @return Rank selected by JRadio Buttons
 	 */
 	private Rank findRankSelections() {
@@ -622,7 +630,7 @@ public class ScheduleController {
 	/**
 	 * Helps to find what deployments are selected so we can add them to
 	 * knownDeployments of the Employee
-	 * 
+	 *
 	 * @return an ArrayList<Deployment> of the deployments corresponding to the
 	 *         selected checkboxes
 	 */
@@ -685,7 +693,7 @@ public class ScheduleController {
 	 * Looks at all of the checkboxes from ScheduleView and sees if they are
 	 * selected or not, then adds all the selected checkboxes corresponding
 	 * deployment as a known deployment for the employee
-	 * 
+	 *
 	 * @param e
 	 *            the employee we are setting the known deployments for
 	 */
@@ -737,7 +745,7 @@ public class ScheduleController {
 	 * Sets up the availabilityList in ScheduleView by checking the availability of
 	 * Employee e, then sets the corresponding indexes as selected so the
 	 * availability displayed reflects the employee's actual availability
-	 * 
+	 *
 	 * @param e
 	 *            the employee we are editing
 	 */
@@ -788,7 +796,7 @@ public class ScheduleController {
 		private Employee employeeToEdit;
 
 		/**
-		 * 
+		 *
 		 * @param e
 		 */
 		public EditEmployeeSubmitButtonListener(Employee e) {
@@ -827,7 +835,7 @@ public class ScheduleController {
 
 				addDeployments(employeeToEdit);
 				employeeWindow();
-				
+
 				//Update data.dat
 				employeeList.writeToFile("data.dat");
 			} catch (NoNameException ex) {

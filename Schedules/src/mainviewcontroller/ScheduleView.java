@@ -15,8 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
- * 
- * 
+ *
+ *
  */
 public class ScheduleView extends JFrame {
 	// Times
@@ -26,7 +26,7 @@ public class ScheduleView extends JFrame {
 	protected JList availabilityList;
 
 	// Buttons
-	protected JButton scheduleButton;
+	protected JButton viewButton;
 	protected JButton editListButton;
 	protected JButton submitButton;
 	protected JButton cancelRemoveButton;
@@ -81,7 +81,7 @@ public class ScheduleView extends JFrame {
 	 * Non-Arg constructor initializes components and calls init() method
 	 */
 	public ScheduleView() {
-		scheduleButton = new JButton("Generate Schedule");
+		viewButton = new JButton("View Employee List");
 		editListButton = new JButton("Add New Employee");
 		// These two buttons cause two different events so have different text assigned
 		// depending where they are used.
@@ -166,7 +166,7 @@ public class ScheduleView extends JFrame {
 		weekPanel = new JPanel();
 		employeePanelPanel = new JPanel();
 		wrappingPanel = new JPanel();
-		
+
 
 		employeeScroll = new JScrollPane();
 		availabilityScroll = new JScrollPane();
@@ -194,8 +194,8 @@ public class ScheduleView extends JFrame {
 	/**
 	 * Adds listener to addSchedule Button
 	 */
-	public void addScheduleButtonListener(ActionListener listener) {
-		scheduleButton.addActionListener(listener);
+	public void addViewButtonListener(ActionListener listener) {
+		viewButton.addActionListener(listener);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class ScheduleView extends JFrame {
 	 * ActionListeners because only one reference for this button exists, but the
 	 * button will be instantiated many times (every time we add or edit and
 	 * employee).
-	 * 
+	 *
 	 */
 	public void addSubmitButtonListener(ActionListener listener) {
 		if (submitButton.getActionListeners().length != 0) {

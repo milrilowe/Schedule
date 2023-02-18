@@ -29,7 +29,7 @@ public class EmployeeList implements Iterable<Employee> {
 	/**
 	 * Constructor takes a String as a parameter. The String will be the name of a
 	 * .dat file that it will read from to get an EmployeeList from
-	 * 
+	 *
 	 * @param file
 	 *            The .dat file that contains data for the employeeList
 	 */
@@ -40,7 +40,7 @@ public class EmployeeList implements Iterable<Employee> {
 
 	/**
 	 * Implements Iteratable.iterator(), delegates to ArrayList<> iterator
-	 * 
+	 *
 	 * @return: ArrayList<> iterator
 	 */
 	public Iterator<Employee> iterator() {
@@ -50,7 +50,7 @@ public class EmployeeList implements Iterable<Employee> {
 
 	/**
 	 * Adds an employee to the employeeList
-	 * 
+	 *
 	 * @param emp
 	 *            the employee to be added
 	 */
@@ -98,7 +98,7 @@ public class EmployeeList implements Iterable<Employee> {
 
 		return quickSort(sort, -1, sort.size());
 
-		
+
 		}
 
 	/**
@@ -109,24 +109,24 @@ public class EmployeeList implements Iterable<Employee> {
 	 * @return		ArrayList<Employee> sorted by availability
 	 */
 	private static ArrayList<Employee> quickSort(ArrayList<Employee> list, int a, int b) {
-	
+
 		if (a >= b) {
 			return list;
 		}
-	
+
 		Employee pivot = list.get(b);
-	
+
 		int left = a;
 		int right = b;
-	
+
 		while (left < right) {
 			while(list.get(left).compareAvailability(pivot) < 0)
 				left++;
-	
+
 			while(list.get(right).compareAvailability(pivot) > 0)
 				right--;
-	
-			if (right > left);
+
+			if (right > left)
 			{
 				Collections.swap(list, left, right);
 			}
@@ -136,20 +136,20 @@ public class EmployeeList implements Iterable<Employee> {
 	quickSort(list, right+1, b);
 
 	return list;
-	} 
+	}
 
 	/**
 	 * Returns employeeList
-	 * 
+	 *
 	 * @return employeeList
 	 */
 	public static ArrayList<Employee> getList() {
-		return new EmployeeList();
+		return employeeList;
 	}
 
 	/**
 	 * Writes the EmployeeList to a file to save the data
-	 * 
+	 *
 	 * @param file
 	 *            the file name as a string to be written to
 	 */
@@ -181,7 +181,7 @@ public class EmployeeList implements Iterable<Employee> {
 	/**
 	 * Reads Employee objects from a file and adds them to an EmployeeList that we will return
 	 * @param file The file to read from
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public EmployeeList readFromFile(String file) {
 

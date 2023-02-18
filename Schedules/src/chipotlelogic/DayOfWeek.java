@@ -3,7 +3,7 @@ package chipotlelogic;
  * Days of the week
  *
  */
-public enum Day {
+public enum DayOfWeek {
 	monday("Monday"),
     tuesday("Tuesday"),
     wednesday("Wednesday"),
@@ -14,7 +14,7 @@ public enum Day {
 
 	private String toString;
 
-	Day(String toString) {
+	DayOfWeek(String toString) {
 		this.toString = toString;
 	}
 
