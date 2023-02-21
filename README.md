@@ -22,6 +22,8 @@ The `data.dat` file contains example data of employees so the application can be
 
 ## Usage
 To add an employee, click the `Add New Employee` button located at the bottom of the window. From there, you can select the team member's Role (e.g. 'Crew', 'Kitchen Manager', etc.), set their availability, and select their known deployments.  From the home menu, you can select the `Edit` button to update any information.
+
 ![](./screenshots/EditEmployee.png)
 The schedule will immediately change to reflect any changes made to the list of employees.
+
 ![](./screenshots/Schedule.png)
